@@ -8,6 +8,12 @@
 git clone https://github.com/rklit
 ```
 
+<h3>Run</h3>
+
+```{bash}
+docker-compose up -d
+```
+
 <h3>They used there:</h3>
 
 * **Grafana**
@@ -15,4 +21,6 @@ git clone https://github.com/rklit
 * **Prometheus**
 
 * **Node-Exporter**
+
+* **MySQL-Exporter**
 

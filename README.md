@@ -2,12 +2,26 @@
 
 <h2>How to install?</h2>
 
-<h3>1. Git clone</h3>
+<h3>Step 1: Prepare the Environment</h3>
+
+<h4>1. Create a folder for your Docker Compose configuration, for example, monitoring:</h4>
+
+```{bash}
+mkdir monitoring
+```
+
+<h4>2. Navigate to this folder:</h4>
+
+```{bash}
+cd monitoring
+```
+
+<h4>3. Git clone</h4>
 
 ```{bash}
 git clone https://github.com/RKLIT/monitoring-grafna.git
 ```
-<h3>2. Change your settings</h3>
+<h3>Step 2: Change your settings</h3>
 
 ```{bash}
 docker-compose.yml
@@ -70,14 +84,54 @@ networks:
  frog_image_share_network:
     external: true
 ```
+<h3>Additional Files</h3>
+
+```{bash}
+prometheus.yml
+______________
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'mysql-exporter'
+    static_configs:
+      - targets: ['mysql-exporter:9104']
+  
+  - job_name: 'nodeexporter'
+    static_configs:
+        - targets: ['10.100.2.51:59100']
+
+  - job_name: 'mysqlexporter'
+    static_configs:
+        - targets: ['10.100.2.51:59104']
+```
+
+<h4>MySQL Exporter .my.cnf configuration file: Create a file named .my.cnf in the project root directory with the following content to provide MariaDB credentials:</h4>
+
+```{ini}
+.my.cnf
+_______
+
+[client]
+user=exporter_user
+password=exporter_password
+```
+
 
 <h3>If you want to run:</h3>
 
 ```{bash}
 docker-compose up -d
 ```
-
-<h4>This is repository works with frog infrastraction, so you will need to do changes anyway.</h4>  
 
 <h3>They used there:</h3>
 
